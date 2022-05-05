@@ -22,3 +22,7 @@ private void mostrarResultados() throws SQLException{
             String condicionBusqueda="";
             //Metodo que realiza la busqueda
             utilerias.desplegarRegistro(tabla, camposTabla, condicionBusqueda);
+
+
+}catch(SQLException ex){
+            
