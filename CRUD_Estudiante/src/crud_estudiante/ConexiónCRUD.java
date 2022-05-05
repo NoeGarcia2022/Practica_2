@@ -4,6 +4,7 @@ import java.sql.Connection;
 
 
 public class ConexiónCRUD {
+<<<<<<< Updated upstream
     /*Ruta de la base de datos del servidor 127.0.0.1, el puerto 3306 y el nombre
     de la base de datos bd_recurso_humano
     */
@@ -16,5 +17,9 @@ public class ConexiónCRUD {
     private final String driverConector = "com.mysql.jdbc.Driver";
     //Objeto de la clase Connection del paquete java.sql
     private static Connection conexion;
+=======
+     
+    }
+>>>>>>> Stashed changes
     
 }
