@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-05-2022 a las 02:54:04
--- Versión del servidor: 10.4.22-MariaDB
--- Versión de PHP: 8.1.2
+-- Tiempo de generación: 05-05-2022 a las 19:20:35
+-- Versión del servidor: 10.4.20-MariaDB
+-- Versión de PHP: 8.0.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,7 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `bd_estudiantes`
 --
+DROP DATABASE IF EXISTS `bd_estudiantes`;
 CREATE DATABASE IF NOT EXISTS `bd_estudiantes` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `bd_estudiantes`;
 
@@ -34,7 +35,7 @@ CREATE TABLE `tb_datos_estudiantes` (
   `carnet_estudiante` varchar(6) DEFAULT NULL,
   `nom_estudiante` varchar(30) DEFAULT NULL,
   `ape_estudiante` varchar(30) DEFAULT NULL,
-  `edad_estudiante` int(3) DEFAULT NULL
+  `edad_estudiante` varchar(3) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -42,10 +43,8 @@ CREATE TABLE `tb_datos_estudiantes` (
 --
 
 INSERT INTO `tb_datos_estudiantes` (`id_estudiante`, `carnet_estudiante`, `nom_estudiante`, `ape_estudiante`, `edad_estudiante`) VALUES
-(10001, 'es1204', 'Jonathan Alexis', 'Molina Crespin', 20),
-(10002, 'es1542', 'Noe Antonio', 'Garcia Valle', 20),
-(10003, 'es1856', 'Veronica Yaneth', 'Garcia Perez', 19),
-(10004, 'es1512', 'Elias Ismael', 'Santos Paname�o', 19);
+(1001, 'est100', 'Jonathan Alexis', 'Molina Crespin', '20'),
+(1002, 'est102', 'Veronica Yaneth', 'Garcia Perez', '19');
 
 --
 -- Índices para tablas volcadas
@@ -65,10 +64,11 @@ ALTER TABLE `tb_datos_estudiantes`
 -- AUTO_INCREMENT de la tabla `tb_datos_estudiantes`
 --
 ALTER TABLE `tb_datos_estudiantes`
-  MODIFY `id_estudiante` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10005;
+  MODIFY `id_estudiante` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1005;
 --
 -- Base de datos: `bd_recurso_humano`
 --
+DROP DATABASE IF EXISTS `bd_recurso_humano`;
 CREATE DATABASE IF NOT EXISTS `bd_recurso_humano` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `bd_recurso_humano`;
 
@@ -134,8 +134,98 @@ ALTER TABLE `tb_persona`
 ALTER TABLE `tb_contacto`
   MODIFY `id_contacto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
+-- Base de datos: `db_inventary`
+--
+DROP DATABASE IF EXISTS `db_inventary`;
+CREATE DATABASE IF NOT EXISTS `db_inventary` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci;
+USE `db_inventary`;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tb_categorias`
+--
+
+CREATE TABLE `tb_categorias` (
+  `id_categoria` int(11) NOT NULL,
+  `nom_categoria` varchar(60) COLLATE utf8_spanish_ci NOT NULL,
+  `estado_categoria` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tb_productos`
+--
+
+CREATE TABLE `tb_productos` (
+  `id_producto` int(11) NOT NULL,
+  `nom_producto` varchar(60) COLLATE utf8_spanish_ci NOT NULL,
+  `des_producto` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `stock` decimal(3,2) NOT NULL,
+  `precio` decimal(3,2) NOT NULL,
+  `unidad_medida` tinyint(1) NOT NULL,
+  `estado_producto` int(11) NOT NULL,
+  `categoria` int(11) NOT NULL,
+  `fecha_entrada` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tb_usuarios`
+--
+
+CREATE TABLE `tb_usuarios` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(60) COLLATE utf8_spanish_ci NOT NULL,
+  `apellidos` varchar(35) COLLATE utf8_spanish_ci NOT NULL,
+  `correo` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `usuario` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `clave` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
+  `tipo` tinyint(1) NOT NULL,
+  `estado` tinyint(1) NOT NULL,
+  `pregunta` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `respuesta` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `fecha_registro` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `tb_categorias`
+--
+ALTER TABLE `tb_categorias`
+  ADD PRIMARY KEY (`id_categoria`);
+
+--
+-- Indices de la tabla `tb_productos`
+--
+ALTER TABLE `tb_productos`
+  ADD PRIMARY KEY (`id_producto`),
+  ADD KEY `categoria` (`categoria`);
+
+--
+-- Indices de la tabla `tb_usuarios`
+--
+ALTER TABLE `tb_usuarios`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `tb_productos`
+--
+ALTER TABLE `tb_productos`
+  ADD CONSTRAINT `tb_productos_ibfk_1` FOREIGN KEY (`categoria`) REFERENCES `tb_categorias` (`id_categoria`);
+--
 -- Base de datos: `phpmyadmin`
 --
+DROP DATABASE IF EXISTS `phpmyadmin`;
 CREATE DATABASE IF NOT EXISTS `phpmyadmin` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
 USE `phpmyadmin`;
 
@@ -282,7 +372,7 @@ CREATE TABLE `pma__recent` (
 --
 
 INSERT INTO `pma__recent` (`username`, `tables`) VALUES
-('root', '[{\"db\":\"bd_estudiantes\",\"table\":\"tb_datos_estudiantes\"},{\"db\":\"bd_recurso_humano\",\"table\":\"tb_contacto\"},{\"db\":\"bd_recurso_humano\",\"table\":\"tb_persona\"}]');
+('root', '[{\"db\":\"bd_estudiantes\",\"table\":\"tb_datos_estudiantes\"},{\"db\":\"bd_estudiantes\",\"table\":\"tb_contacto\"}]');
 
 -- --------------------------------------------------------
 
@@ -389,7 +479,7 @@ CREATE TABLE `pma__userconfig` (
 --
 
 INSERT INTO `pma__userconfig` (`username`, `timevalue`, `config_data`) VALUES
-('root', '2022-05-05 00:23:02', '{\"Console\\/Mode\":\"collapse\",\"lang\":\"es\"}');
+('root', '2022-05-05 14:15:41', '{\"Console\\/Mode\":\"collapse\",\"lang\":\"es\"}');
 
 -- --------------------------------------------------------
 
@@ -580,6 +670,7 @@ ALTER TABLE `pma__savedsearches`
 --
 -- Base de datos: `test`
 --
+DROP DATABASE IF EXISTS `test`;
 CREATE DATABASE IF NOT EXISTS `test` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `test`;
 COMMIT;
