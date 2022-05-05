@@ -21,19 +21,19 @@ public class Update {
         utilerias.desplegarRegistro(tablaBuscar, campoBuscar, condicionBuscar);
         
         System.out.println("Carnet:");
-         est.setCarnetEstudiante(leer.nextLine());
+         est.setCarnetEstudiante(leer.next());
          
          System.out.println("Nombres:");
-         est.setNomEstudiante(leer.nextLine());
+         est.setNomEstudiante(leer.next());
          
           System.out.println("Apellidos");
-         est.setApeEstudiante(leer.nextLine());
+         est.setApeEstudiante(leer.next());
          
          System.out.println("Edad:");
          est.setEdadEstudiante(leer.nextInt());
         
         String tabla = "tb_datos_estudiantes";
-        String camposValoresNuevos = "carnet_estudiante = ´" + est.getCarnetEstudiante() + "', nom_estudiante = '"
+        String camposValoresNuevos = "carnet_estudiante = '" + est.getCarnetEstudiante() + "', nom_estudiante = '"
                 + est.getNomEstudiante() + "', ape_estudiante = '" + est.getApeEstudiante() + "', edad_estudiante = '"
                 + est.getEdadEstudiante() + "'";
         
