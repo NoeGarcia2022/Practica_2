@@ -28,6 +28,27 @@ public class MenuPrincipal {
         System.out.print("Seleccionar opcion: ");
         opcionMenu = opcionSelecionada.next();
         
-        
+        //Despliegue de menu basado en las opciones selecionadas
+        switch (opcionMenu){
+            //Las clases para el CRUD por el momento se colocan como comentarios
+            case "1":
+                Create create = new Create();
+                break;
+            case "2":
+                Read read = new Read();
+                break;
+            case "3":
+                Update update = new Update();
+                break;
+            case "4":
+                Delete delete = new Delete();
+                break;
+            case "5":
+                System.exit(0);
+                break;
+            default:
+                System.out.println("Seleccion invalida!");
+                break;
+        }
     }
  }  
