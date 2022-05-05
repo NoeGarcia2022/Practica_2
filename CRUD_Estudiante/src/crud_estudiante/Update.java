@@ -36,6 +36,11 @@ public class Update {
         String camposValoresNuevos = "carnet_estudiante = ´" + est.getCarnetEstudiante() + "', nom_estudiante = '"
                 + est.getNomEstudiante() + "', ape_estudiante = '" + est.getApeEstudiante() + "', edad_estudiante = '"
                 + est.getEdadEstudiante() + "'";
+        
+        utilerias.desplegarRegistro(tabla, camposValoresNuevos, condicionBuscar);
+        System.out.println("Modificado correctamente");
+        
+        MenuPrincipal.desplegarMenu();
     
 }
 }
