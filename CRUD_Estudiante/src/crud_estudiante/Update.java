@@ -19,5 +19,15 @@ public class Update {
         String campoBuscar = "id_estudiante, carnet_estudiante, nom_estudiante, ape_estudiante, edad_estudiante";
         String condicionBuscar = "id_estudiante = " + est.getIdEstudiante();
         utilerias.desplegarRegistro(tablaBuscar, campoBuscar, condicionBuscar);
+        
+        System.out.println("Carnet:");
+         est.setCarnetEstudiante(leer.nextLine());
+         
+         System.out.println("Nombres:");
+         est.setNomEstudiante(leer.nextLine());
+         
+          System.out.println("Apellidos");
+         est.setApeEstudiante(leer.nextLine());
     
+}
 }
