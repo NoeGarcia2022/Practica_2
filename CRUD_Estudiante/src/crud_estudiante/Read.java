@@ -10,7 +10,7 @@ public class Read {
         mostrarResultados();//Llamar el metodo dentro de esta clase 
     
 }
-    }
+    
 
 private void mostrarResultados() throws SQLException{
         try{
@@ -26,3 +26,8 @@ private void mostrarResultados() throws SQLException{
 
 }catch(SQLException ex){
             System.out.println("Ha ocurrido el siguiente error:" + ex.getMessage());
+}finally{
+            MenuPrincipal.desplegarMenu();
+        }
+    }
+    }
