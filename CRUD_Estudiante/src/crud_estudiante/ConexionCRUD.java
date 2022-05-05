@@ -51,4 +51,72 @@ public class ConexionCRUD {
         }
     }
     
+      public void actualizarEliminarRegistros (String tabla, String valoresCamposNuevos, String condicion){
+    //Cargar la conexion
+    ConexionCRUD conectar = new ConexionCRUD();
+    Connection cone = conectar.getConnection();
+        try {
+            Statement stmt;
+            String sqlQueryStmt;
+            //Verificar que valoresCamposNuevos venga vacia y asi selecionar si es borrar o actualizar registro
+            if (valoresCamposNuevos.isEmpty()) {
+                sqlQueryStmt = "DELETE FROM " + tabla + " WHERE " + condicion + ";";
+            } else {
+                sqlQueryStmt = "UPDATE " + tabla + " SET " + valoresCamposNuevos + " WHERE " + condicion + ";";
+            }
+            stmt = cone.createStatement();
+            stmt.executeUpdate(sqlQueryStmt);
+            stmt.close();
+            cone.close();
+        } catch (SQLException ex) {
+            System.out.println("Ha ocurrido el siguiente error: " + ex.getMessage());
+        }
+    }
+      
+      public void desplegarRegistro(String tablaBuscar, String camposBuscar, String condicionBuscar) throws SQLException{
+    //Cargar la conexion
+    ConexionCRUD conectar = new ConexionCRUD();
+    Connection cone = conectar.getConnection();
+        try {
+            Statement stmt;
+            String sqlQueryStmt;
+            if (condicionBuscar.equals("")) {
+                sqlQueryStmt = "SELECT " + camposBuscar + " FROM " + tablaBuscar + ";";
+            } else {
+                sqlQueryStmt = "SELECT " + camposBuscar + " FROM " + tablaBuscar + " WHERE " + condicionBuscar;
+            }
+            stmt = cone.createStatement();
+            stmt.executeQuery(sqlQueryStmt);
+            //Le indicamos que ejecute la consulta de la tabla y le pasamos por argumentos nuestra sentencia
+            try (ResultSet miResultSet = stmt.executeQuery(sqlQueryStmt)){
+                if (miResultSet.next()) { //Ubica el cursor en la primera fila de la tabla de resultado
+                    ResultSetMetaData metaData = miResultSet.getMetaData();
+                    int numColumnas = metaData.getColumnCount();
+                    System.out.print("<<REGISTROS ALMACENADOS>>");
+                    System.out.println();
+                    for (int i = 1; i <= numColumnas; i++) {
+                        //Muestra los titulos de las columnas y %-20\t indica la separacion entre columnas
+                        System.out.printf("%-20s\t", metaData.getColumnName(i));
+                    }
+                    System.out.println();
+                    do {                        
+                        for (int i = 1; i <=numColumnas ; i++) {
+                            System.out.printf("%-20s\t", miResultSet.getObject(i));   
+                        }
+                        System.out.println();
+                    } while (miResultSet.next());
+                    System.out.println();
+                } else {
+                    System.out.println("No se han encontrado registros");
+                }
+                miResultSet.close();//Cerrar el ResultSet
+            } finally{
+                //Cerrar el Statement y la Conexion; se cierran en orden inverso de como se han abierto
+                stmt.close();
+                cone.close();
+            }
+        } catch (SQLException ex) {
+            System.out.println("Ha ocurrido el siguiente error: "+ ex.getMessage());
+        }
+    }
 }
