@@ -17,5 +17,7 @@ public class Update {
         
         String tablaBuscar = "tb_datos_estudiantes";
         String campoBuscar = "id_estudiante, carnet_estudiante, nom_estudiante, ape_estudiante, edad_estudiante";
+        String condicionBuscar = "id_estudiante = " + est.getIdEstudiante();
+        utilerias.desplegarRegistro(tablaBuscar, campoBuscar, condicionBuscar);
     
 }
