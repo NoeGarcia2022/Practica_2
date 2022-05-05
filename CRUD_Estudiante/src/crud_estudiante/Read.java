@@ -24,10 +24,10 @@ private void mostrarResultados() throws SQLException{
             utilerias.desplegarRegistro(tabla, camposTabla, condicionBusqueda);
 
 
-}catch(SQLException ex){
-            System.out.println("Ha ocurrido el siguiente error:" + ex.getMessage());
-}finally{
-            MenuPrincipal.desplegarMenu();
-        }
+        }catch(SQLException ex){
+                    System.out.println("Ha ocurrido el siguiente error:" + ex.getMessage());
+        }finally{
+                    MenuPrincipal.desplegarMenu();
+                }
     }
     }
