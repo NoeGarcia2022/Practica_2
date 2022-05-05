@@ -1,0 +1,22 @@
+
+INTEGRANTES:
+
+NOMBRE: Jonathan Alexis Molina Crespin 
+ROL: Product Owner
+USUARIO GITHUB: Crespin2
+
+NOMBRE: Noe Antonio Garcia Valle
+ROL: Scrum Master
+USUARIO GITHUB: NoeGarcia2022
+
+NOMBRE: Veronica Yaneth Garcia Perez
+ROL: Diseñador/a
+USUARIO GITHUB: V3Ronica1
+
+NOMBRE: Elias Ismael Santos Panameño
+ROL: Analista
+USUARIO GITHUB: Ismael-santo
+
+GRUPO: SIS21B
+
+LINK DEL REPOSITORIO: https://github.com/NoeGarcia2022/practica_2.git
