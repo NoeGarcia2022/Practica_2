@@ -37,7 +37,7 @@ public class Update {
                 + est.getNomEstudiante() + "', ape_estudiante = '" + est.getApeEstudiante() + "', edad_estudiante = '"
                 + est.getEdadEstudiante() + "'";
         
-        utilerias.desplegarRegistro(tabla, camposValoresNuevos, condicionBuscar);
+        utilerias.actualizarEliminarRegistros(tabla, camposValoresNuevos, condicionBuscar);
         System.out.println("Modificado correctamente");
         
         MenuPrincipal.desplegarMenu();
